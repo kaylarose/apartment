@@ -173,7 +173,7 @@ module Apartment
       #   @return {String} tenant name with Rails environment *optionally* prepended
       #
       def environmentify(tenant)
-        unless tenant.include?(Rails.env)
+        unless Object.const_defined?('Rails') && tenant.include?(Rails.env)
           if Apartment.prepend_environment
             "#{Rails.env}_#{tenant}"
           elsif Apartment.append_environment
